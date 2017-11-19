@@ -28,8 +28,12 @@
     <md-list flex>
         <md-list-item ng-repeat="item in $ctrl.results" class="noright">
             <p>{{ item.trackName }}</p>
-            <md-icon aria-label="Favorite" class="material-icons" ng-click="$ctrl.toggleAddToChart(item, $event)">{{ item.selected ? 'shopping_cart' : 'add_shopping_cart' }}</md-icon>
-            <md-icon aria-label="Detail" class="material-icons" ng-click="$ctrl.showDetail(item, $event)">info_outline</md-icon>
+            <md-button class="md-icon-button" aria-label="Add" ng-click="$ctrl.toggleAddToChart(item, $ctrl.selectedItems, $event)">
+                <md-icon aria-label="Favorite" class="material-icons">{{ item.selected ? 'shopping_cart' : 'add_shopping_cart' }}</md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Detail" ng-click="$ctrl.showDetail(item, $event)">
+                <md-icon aria-label="Detail" class="material-icons">info_outline</md-icon>
+            </md-button>
         </md-list-item>
     </md-list>
 </md-content>

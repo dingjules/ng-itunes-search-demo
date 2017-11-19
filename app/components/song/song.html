@@ -9,14 +9,11 @@
         </md-card-title-media>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
-        <md-button class="md-icon-button" aria-label="Favorite">
+        <md-button class="md-icon-button" aria-label="Preview">
             <md-icon aria-label="Menu" class="material-icons">play_circle_outline</md-icon>
         </md-button>
-        <md-button class="md-icon-button" aria-label="Settings">
-            <md-icon aria-label="Menu" class="material-icons">favorite_border</md-icon>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="Share">
-            <md-icon aria-label="Menu" class="material-icons">add_shopping_cart</md-icon>
+        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleAddToChart(song, selectedItems, $event)">
+            <md-icon aria-label="Menu" class="material-icons">{{ song.selected ? 'shopping_cart' : 'add_shopping_cart' }}</md-icon>
         </md-button>
     </md-card-actions>
 </md-card>

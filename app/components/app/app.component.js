@@ -14,16 +14,16 @@ class ctrl {
         this.selectedItems = [];
     }
 
-    toggleAddToChart(item, $event) {
-        const indexInChart = this.selectedItems.findIndex((result) => {
+    toggleAddToChart(item, selectedItems, $event) {
+        const indexInChart = selectedItems.findIndex((result) => {
             return result.trackId === item.trackId;
         });
 
         if (indexInChart < 0) {
-            this.selectedItems.push(item);
+            selectedItems.push(item);
             item.selected = true;
         } else {
-            this.selectedItems.splice(indexInChart, 1);
+            selectedItems.splice(indexInChart, 1);
             item.selected = false;
         }
     }
@@ -36,7 +36,11 @@ class ctrl {
             targetEvent: event,
             clickOutsideToClose: true,
             fullscreen: false,
-            locals: { song: item }
+            locals: { 
+                song: item,
+                selectedItems: this.selectedItems,
+                toggleAddToChart: this.toggleAddToChart
+            }
         });
     }
 
