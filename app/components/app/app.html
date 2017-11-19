@@ -4,22 +4,32 @@
     </div>
 </md-toolbar>
 
-<md-content class="md-padding" layout="column" layout-wrap>
-    <div flex="20">
-        <md-input-container>
-            <label>Artist</label>
-            <input ng-model="$ctrl.term">
-        </md-input-container>
-        <div>
-            <md-button type="submit" ng-click="$ctrl.search()">Search</md-button>
+<md-content class="md-padding" layout="row" layout-wrap>
+    <div flex layout="column">
+        <div flex="200px">
+            <md-input-container flex>
+                <label>Artist</label>
+                <input ng-model="$ctrl.term">
+            </md-input-container>
+            <div flex>
+                <md-button type="submit" ng-click="$ctrl.search()">Search</md-button>
+            </div>
+        </div>
+
+        <div flex>
+            <md-list>
+                <md-list-item ng-repeat="item in $ctrl.selectedItems" class="noright">
+                    <p>{{ item.trackName }}</p>
+                    <md-icon aria-label="Remove" class="material-icons" ng-click="$ctrl.removeFromChart($index, item)">remove_shopping_cart</md-icon>
+                </md-list-item>
+            </md-list>
         </div>
     </div>
     <md-list flex>
-        <md-list-item ng-repeat="item in $ctrl.results" ng-click="$ctrl.showDetail(item, $event)" class="noright">
-            <md-checkbox class="md-secondary" ng-model="item.selected"></md-checkbox>
+        <md-list-item ng-repeat="item in $ctrl.results" class="noright">
             <p>{{ item.trackName }}</p>
-            <md-icon aria-label="Menu" class="material-icons">favorite_border</md-icon>
-            <md-icon aria-label="Menu" class="material-icons">info_outline</md-icon>
+            <md-icon aria-label="Favorite" class="material-icons" ng-click="$ctrl.toggleAddToChart(item, $event)">{{ item.selected ? 'shopping_cart' : 'add_shopping_cart' }}</md-icon>
+            <md-icon aria-label="Detail" class="material-icons" ng-click="$ctrl.showDetail(item, $event)">info_outline</md-icon>
         </md-list-item>
     </md-list>
 </md-content>
