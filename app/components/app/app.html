@@ -15,7 +15,7 @@
         </div>
     </div>
     <md-list flex>
-        <md-list-item ng-repeat="item in $ctrl.results" ng-click="$ctrl.goToPerson(item, $event)" class="noright">
+        <md-list-item ng-repeat="item in $ctrl.results" ng-click="$ctrl.showDetail(item, $event)" class="noright">
             <md-checkbox class="md-secondary" ng-model="item.selected"></md-checkbox>
             <p>{{ item.trackName }}</p>
             <md-icon aria-label="Menu" class="material-icons">favorite_border</md-icon>

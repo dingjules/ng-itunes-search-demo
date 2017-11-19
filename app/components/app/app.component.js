@@ -1,6 +1,9 @@
 import tpl from './app.html'
 import './app.less';
 
+import { SongDetailController } from '../song/song.ctrl.js';
+import SongDetailTpl from '../song/song.html';
+
 class ctrl {
     constructor($http, AppService, $mdDialog) {
         'ngInject';
@@ -10,15 +13,16 @@ class ctrl {
         this._$mdDialog = $mdDialog;
     }
 
-    goToPerson(item, event) {
-        this._$mdDialog.show(
-            this._$mdDialog.alert()
-                .title('Navigating')
-                .textContent(item)
-                .ariaLabel('Person inspect demo')
-                .ok('Neat!')
-                .targetEvent(event)
-        );
+    showDetail(item, event) {
+        this._$mdDialog.show({
+            controller: SongDetailController,
+            templateUrl: SongDetailTpl,
+            parent: angular.element(document.body),
+            targetEvent: event,
+            clickOutsideToClose:true,
+            fullscreen: false,
+            locals: { song: item }
+          });
     }
 
     search() {
