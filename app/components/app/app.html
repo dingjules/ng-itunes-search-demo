@@ -1,5 +1,25 @@
-<md-toolbar class="md-warn">
+<md-toolbar class="md-primary">
     <div class="md-toolbar-tools">
-        <h2 class="md-flex">Toolbar: md-warn</h2>
+        <h2 class="md-flex">iTunes</h2>
     </div>
 </md-toolbar>
+
+<md-content class="md-padding" layout="column" layout-wrap>
+    <div flex="20">
+        <md-input-container>
+            <label>Artist</label>
+            <input ng-model="$ctrl.term">
+        </md-input-container>
+        <div>
+            <md-button type="submit" ng-click="$ctrl.search()">Search</md-button>
+        </div>
+    </div>
+    <md-list flex>
+        <md-list-item ng-repeat="item in $ctrl.results" ng-click="$ctrl.goToPerson(item, $event)" class="noright">
+            <md-checkbox class="md-secondary" ng-model="item.selected"></md-checkbox>
+            <p>{{ item.trackName }}</p>
+            <md-icon aria-label="Menu" class="material-icons">favorite_border</md-icon>
+            <md-icon aria-label="Menu" class="material-icons">info_outline</md-icon>
+        </md-list-item>
+    </md-list>
+</md-content>
