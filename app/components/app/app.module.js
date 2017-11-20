@@ -1,3 +1,4 @@
+import angular from 'angular';
 import 'angular-material';
 
 import { appComponent } from './app.component';
