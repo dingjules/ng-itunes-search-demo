@@ -4,36 +4,54 @@
     </div>
 </md-toolbar>
 
-<md-content class="md-padding" layout="row" layout-wrap>
+<md-content class="md-padding app-container" layout="row" layout-wrap>
     <div flex layout="column">
-        <div flex="200px">
+        <div flex="20" layout="row" layout-align="center top">
             <md-input-container flex>
-                <label>Artist</label>
+                <label>Try something here</label>
                 <input ng-model="$ctrl.term">
             </md-input-container>
-            <div flex>
-                <md-button type="submit" ng-click="$ctrl.search()">Search</md-button>
-            </div>
+            <md-input-container flex>
+                <label>From store</label>
+                <md-select name="type" ng-model="$ctrl.country">
+                    <md-option value="US">United States</md-option>
+                    <md-option value="FR">France</md-option>
+                    <md-option value="CN">China</md-option>
+                </md-select>
+            </md-input-container>
+            <md-button class="md-fab md-primary" aria-label="Start searching" ng-click="$ctrl.search()">
+                <md-icon aria-label="Detail" class="material-icons">search</md-icon>
+            </md-button>
         </div>
 
-        <div flex>
+
+        <div flex class="cart-list">
             <md-list>
                 <md-list-item ng-repeat="item in $ctrl.selectedItems" class="noright">
                     <p>{{ item.trackName }}</p>
-                    <md-icon aria-label="Remove" class="material-icons" ng-click="$ctrl.removeFromChart($index, item)">remove_shopping_cart</md-icon>
+                    <md-button class="md-icon-button">
+                        <md-tooltip>Remove from cart</md-tooltip>
+                        <md-icon aria-label="Remove" class="material-icons" ng-click="$ctrl.removeFromChart($index, item)">remove_shopping_cart</md-icon>
+                    </md-button>
                 </md-list-item>
             </md-list>
         </div>
     </div>
-    <md-list flex>
-        <md-list-item ng-repeat="item in $ctrl.results" class="noright">
-            <p>{{ item.trackName }}</p>
+    <md-list flex class="result-list" layout-align="center center">
+        <md-list-item ng-if="!$ctrl.isLoading" ng-repeat="item in $ctrl.results" class="noright">
+            <div flex>
+                <md-tooltip>Artist: {{ item.artistName }}</md-tooltip>
+                <p>{{ item.trackName }}</p>
+            </div>
             <md-button class="md-icon-button" aria-label="Add" ng-click="$ctrl.toggleAddToChart(item, $ctrl.selectedItems, $event)">
+                <md-tooltip>{{ item.selected ? 'Remove from cart' : 'Add to cart' }}</md-tooltip>
                 <md-icon aria-label="Favorite" class="material-icons">{{ item.selected ? 'shopping_cart' : 'add_shopping_cart' }}</md-icon>
             </md-button>
             <md-button class="md-icon-button" aria-label="Detail" ng-click="$ctrl.showDetail(item, $event)">
+                <md-tooltip>Show more details</md-tooltip>
                 <md-icon aria-label="Detail" class="material-icons">info_outline</md-icon>
             </md-button>
         </md-list-item>
+        <md-progress-circular ng-if="$ctrl.isLoading" md-diameter="96" class="md-accent loader"></md-progress-circular>
     </md-list>
 </md-content>

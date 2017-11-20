@@ -12,8 +12,15 @@ class ctrl {
         this._$mdDialog = $mdDialog;
 
         this.selectedItems = [];
+
+        this.country = 'US';
+        this.term = 'Ed Sheeran';
     }
 
+    $onInit() {
+        this.search();
+    }
+ 
     toggleAddToChart(item, selectedItems, $event) {
         const indexInChart = selectedItems.findIndex((result) => {
             return result.trackId === item.trackId;
@@ -71,13 +78,16 @@ class ctrl {
     }
 
     _getSongs() {
-        this._AppService.getItems(this.term.replace(/\s/g, '+')).then(
+        this.isLoading = true;
+        this._AppService.getItems(this.term.replace(/\s/g, '+'), this.country).then(
             success => {
                 this.results = success.data.results;
                 this.count = success.data.resultCount;
                 this._updateWithSelectedItems();
             }
-        );
+        ).finally(() => {
+            this.isLoading = false;
+        });
     }
 }
 
