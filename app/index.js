@@ -1,6 +1,4 @@
 import angular from 'angular';
-
-import angular from 'angular';
 import { appModule } from './components/app/app.module'
 
 import './common/style.less';
