@@ -1,8 +1,12 @@
 {
   "name": "ng-itune-demo",
-  "version": "0.0.1",
-  "description": "itune demo with",
+  "version": "0.0.2",
+  "description": "itune demo",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dingjules/ng-itunes-search-demo"
+  },
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.config.js",
     "build": "webpack --config webpack.dist.config.js",
